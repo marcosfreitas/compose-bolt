@@ -1,0 +1,9 @@
+paths:
+    cache: app/cache
+    config: core
+    database: app/database
+    web: public
+    themebase: public/themes
+    files: public/files
+    view: public/views
+    thumbs: public/uploads/thumbs

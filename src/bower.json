@@ -1,0 +1,31 @@
+{
+  "name": "luna-araujo",
+  "version": "2.0.0",
+  "authors": [
+    "Marcos Freitas <marcos@okn.com.br>"
+  ],
+  "description": "site da luna",
+  "main": "",
+  "license": "Copyright 2017 Marcos Freitas",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "~1.12.4",
+    "headjs": "^1.0.3",
+    "modernizr": "^3.3.1",
+    "normalize-css": "^4.2.0",
+    "html5shiv": "^3.7.3",
+    "vex": "^3.0.0",
+    "jquery-mask-plugin": "^1.14.10"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1"
+  }
+}

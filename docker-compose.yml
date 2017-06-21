@@ -1,0 +1,53 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    ports:
+     - "3306:3306"
+    volumes:
+     - /var/lib/mysql
+    restart:
+       always
+    environment:
+     - MYSQL_ROOT_PASSWORD=okn@123
+     - MYSQL_DATABASE=mdcalango
+  bolt:
+    image: rossriley/docker-bolt:3.2
+    network_mode: bridge
+    environment:
+     - BOLT_EXT=bolt/theme-2016 dev-master
+     - BOLT_TITLE=My Bolt Site
+     - BOLT_THEME=bolt/theme-2016
+     - BOLT_DIR_MODE=0755
+     - BOLT_CACHE_DIR=cache
+    volumes:
+     - ./app/extensions:/var/www/html/app/extensions
+     - ./app/cache:/var/www/html/app/cache
+     - ./core:/var/www/html/core
+     - ./app/database:/var/www/html/app/database
+     - ./public:/var/www/html/public
+     - ./public/themes:/var/www/html/public/themes
+     - ./public/files:/var/www/html/public/files
+     - ./public/views:/var/www/html/public/views
+     - ./public/uploads/thumbs:/var/www/html/public/uploads/thumbs
+  web:
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+networks:
+  webnet:
