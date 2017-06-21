@@ -1,4 +1,5 @@
 FROM ubuntu:17.10
+MAINTAINER Marcos Freitas <marcosfreitas@c4network.com.br>
 
 # clean and update sources
 RUN apt-get clean && apt-get update
@@ -22,7 +23,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive && apt-get install -y libbz
     php7.1 \
     libapache2-mod-php7.1 php7.1-fpm php7.1-dev php7.1-cli php7.1-common php7.1-intl php7.1-bcmath php7.1-mbstring php7.1-soap php7.1-xml \
     php7.1-zip php7.1-apcu php7.1-json php7.1-gd php7.1-curl php7.1-mcrypt php7.1-mysql php7.1-sqlite php-memcached php7.1-mbstring \
-    php7.1-mcrypt php7.1-soap php7.1-opcache
+    php7.1-mcrypt php7.1-soap php7.1-opcache \
+    mysql-client
 
 # Manually set up the apache environment variables
 ENV APACHE_RUN_USER www-data
@@ -30,10 +32,6 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
-
-RUN a2enmod headers
-RUN a2enmod rewrite
-RUN service apache2 restart
 
 COPY config/php.ini /usr/local/etc/php/
 
@@ -54,6 +52,10 @@ COPY src/ /var/www/html/
 # Update the default apache site with the config we created.
 ADD config/apache2.conf /etc/apache2/sites-enabled/000-default.conf
 
+RUN a2enmod headers
+RUN a2enmod rewrite
+RUN service apache2 restart
+
 # make the webroot a volume
 VOLUME /var/www/html/
 
@@ -61,5 +63,5 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
-CMD /bin/bash
+ENTRYPOINT ["/bin/bash"]
 
