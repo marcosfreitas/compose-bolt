@@ -9,8 +9,8 @@ services:
     restart:
        always
     environment:
-     - MYSQL_ROOT_PASSWORD=okn@123
-     - MYSQL_DATABASE=mdcalango
+     - MYSQL_ROOT_PASSWORD=c4n
+     - MYSQL_DATABASE=mydatabase
   bolt:
     image: rossriley/docker-bolt:3.2
     network_mode: bridge
