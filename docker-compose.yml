@@ -6,11 +6,14 @@ services:
      - "3306:3306"
     volumes:
      - /var/lib/mysql
+    restart:
+       always
     environment:
      - MYSQL_ROOT_PASSWORD=orange17
      - MYSQL_DATABASE=mydatabase
   bolt:
     image: rossriley/docker-bolt:3.2
+    network_mode: bridge
     environment:
      - BOLT_EXT=bolt/theme-2016 dev-master
      - BOLT_TITLE=My Bolt Site
@@ -31,15 +34,12 @@ services:
     entrypoint: /bin/bash
     stdin_open: true
     tty: true
-    image: marcosfreitas/lamp_boltcms:develop
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1024M
-      restart_policy:
-        condition: on-failure
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: marcosfreitas/skinny-host:develop
+    links:
+     - db
     ports:
       - "80:80"
     networks:

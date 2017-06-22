@@ -1,4 +1,3 @@
-# lamp_boltcms
-ubuntu17.10 + php7.1 + apache2 + mysql5.7 + boltcms:latest
-
-[![Docker Build Statu](https://img.shields.io/docker/build/marcosfreitas/lamp_boltcms.svg?style=flat-square)](https://hub.docker.com/r/marcosfreitas/lamp_boltcms/)
+# Compose Bolt CMS with PHP 7.1, APACHE 2 Server, MySQL 5.7 and Bolt CMS 3.2
+It's repository contains a docker-compose.yml and a docker-stack.yml to orchestrate the build of those services to run BOLT CMS into a container. 
+You can choice to use one of these files.
