@@ -54,7 +54,8 @@ ADD config/apache2.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN a2enmod headers
 RUN a2enmod rewrite
-RUN service apache2 restart
+CMD ["service","apache2","stop"]
+CMD ["service","apache2","start"]
 
 # make the webroot a volume
 VOLUME /var/www/html/
@@ -63,7 +64,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
-CMD ["service","apache2","restart"]
+CMD ["service","apache2","start"]
 
 CMD ["/bin/bash"]
 

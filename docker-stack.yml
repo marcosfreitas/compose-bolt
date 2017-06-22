@@ -6,14 +6,16 @@ services:
      - "3306:3306"
     volumes:
      - /var/lib/mysql
-    restart:
-       always
+    # for docker-compose
+    #restart:
+    #   always
     environment:
      - MYSQL_ROOT_PASSWORD=orange17
      - MYSQL_DATABASE=mydatabase
   bolt:
     image: rossriley/docker-bolt:3.2
-    network_mode: bridge
+    # for docker-compose
+    # network_mode: bridge
     environment:
      - BOLT_EXT=bolt/theme-2016 dev-master
      - BOLT_TITLE=My Bolt Site
@@ -31,22 +33,25 @@ services:
      - ./public/views:/var/www/html/public/views
      - ./public/uploads/thumbs:/var/www/html/public/uploads/thumbs
   web:
-#    entrypoint: /bin/bash
-#    stdin_open: true
-#    tty: true
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-#    deploy:
-#      replicas: 2
-#      resources:
-#        limits:
-#          cpus: "1"
-#          memory: 1024M
-#      restart_policy:
-#        condition: on-failure
-    links:
-     - db
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    # for external dockerfile when working with docker-compose
+    #build:
+    #  context: .
+    #  dockerfile: ./Dockerfile
+    image: marcosfreitas/lamp_boltcms:develop
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+    # for docker-compose
+    #links:
+    # - db
     ports:
       - "80:80"
     networks:
