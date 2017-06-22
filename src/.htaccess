@@ -982,7 +982,7 @@ FileETag None
 
 # Rewrite rules
 
-RewriteBase "/Projects/c4n/solid/"
+RewriteBase "/"
 
 # Reescrita do 'public'
 

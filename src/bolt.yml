@@ -5,5 +5,5 @@ paths:
     web: public
     themebase: public/themes
     files: public/files
-    view: public/views
+    view: public/assets
     thumbs: public/uploads/thumbs
