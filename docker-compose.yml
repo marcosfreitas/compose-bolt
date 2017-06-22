@@ -37,6 +37,16 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    command: mkdir -p app/cache
+    command: mkdir -p core
+    command: mkdir -p app/database
+    command: mkdir -p public/themes
+    command: mkdir -p public/files
+    command: mkdir -p public/views
+    command: mkdir -p public/uploads/thumbs
+    command: mkdir -p public/extensions
+    command: mkdir -p extensions
+    command: mkdir -p vendor
     image: marcosfreitas/skinny-host:develop
     links:
      - db
