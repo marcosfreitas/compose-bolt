@@ -9,7 +9,7 @@ services:
     restart:
        always
     environment:
-     - MYSQL_ROOT_PASSWORD=c4n
+     - MYSQL_ROOT_PASSWORD=orange17
      - MYSQL_DATABASE=mydatabase
   bolt:
     image: rossriley/docker-bolt:3.2
@@ -45,6 +45,8 @@ services:
 #          memory: 1024M
 #      restart_policy:
 #        condition: on-failure
+    links:
+     - db
     ports:
       - "80:80"
     networks:

@@ -23,8 +23,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive && apt-get install -y libbz
     php7.1 \
     libapache2-mod-php7.1 php7.1-fpm php7.1-dev php7.1-cli php7.1-common php7.1-intl php7.1-bcmath php7.1-mbstring php7.1-soap php7.1-xml \
     php7.1-zip php7.1-apcu php7.1-json php7.1-gd php7.1-curl php7.1-mcrypt php7.1-mysql php7.1-sqlite php-memcached php7.1-mbstring \
-    php7.1-mcrypt php7.1-soap php7.1-opcache \
-    mysql-client
+    php7.1-mcrypt php7.1-soap php7.1-opcache
+#    mysql-client mysql-server
 
 # Manually set up the apache environment variables
 ENV APACHE_RUN_USER www-data
@@ -63,5 +63,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["service","apache2","restart"]
+
+CMD ["/bin/bash"]
 
